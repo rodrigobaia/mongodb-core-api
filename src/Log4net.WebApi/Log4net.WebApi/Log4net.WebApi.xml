@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Log4net.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:Log4net.WebApi.Controllers.AuditoriaController">
+            <summary>
+            Auditoria
+            </summary>
+        </member>
+        <member name="M:Log4net.WebApi.Controllers.AuditoriaController.#ctor(Log4net.Infra.Repository.Interfaces.IAuditoriaRepository,AutoMapper.IMapper)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="auditoriaRepository"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:Log4net.WebApi.Controllers.AuditoriaController.InsertAsync(Log4net.WebApi.Models.AuditoriaVM)">
+            <summary>
+            
+            </summary>
+            <param name="auditoriaVM"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Log4net.WebApi.Models.AuditoriaVM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Log4net.WebApi.Models.AuditoriaVM.Exception">
+            <summary>
+            Exception
+            </summary>
+        </member>
+        <member name="P:Log4net.WebApi.Models.AuditoriaVM.Level">
+            <summary>
+            Level
+            </summary>
+        </member>
+        <member name="P:Log4net.WebApi.Models.AuditoriaVM.Message">
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="P:Log4net.WebApi.Models.AuditoriaVM.Created">
+            <summary>
+            Created
+            </summary>
+        </member>
+        <member name="P:Log4net.WebApi.Models.AuditoriaVM.Therad">
+            <summary>
+            Therad
+            </summary>
+        </member>
+        <member name="P:Log4net.WebApi.Models.AuditoriaVM.Method">
+            <summary>
+            Method
+            </summary>
+        </member>
+        <member name="P:Log4net.WebApi.Models.AuditoriaVM.Version">
+            <summary>
+            Version
+            </summary>
+        </member>
+        <member name="P:Log4net.WebApi.Models.AuditoriaVM.Org">
+            <summary>
+            Org
+            </summary>
+        </member>
+        <member name="T:Log4net.WebApi.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Log4net.WebApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:Log4net.WebApi.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Log4net.WebApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Log4net.WebApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>
