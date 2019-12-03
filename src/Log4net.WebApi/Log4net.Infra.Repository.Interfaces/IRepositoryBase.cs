@@ -1,5 +1,8 @@
 ﻿using Log4net.Core;
+using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Log4net.Infra.Repository.Interfaces
@@ -35,9 +38,38 @@ namespace Log4net.Infra.Repository.Interfaces
         Task<long> InsertAsync(IEnumerable<TModel> entities);
 
         /// <summary>
-        /// Total fields
+        /// Get by id
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
-        long CountFields();
+        Task<TModel> GetByAsync(ObjectId id);
+
+        /// <summary>
+        /// Delete
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        Task<long> DeleteAsync(Expression<Func<TModel, bool>> predicate);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        Task<IEnumerable<TModel>> GetFilterAsync(Expression<Func<TModel, bool>> predicate);
+
+        /// <summary>
+        /// Update register
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        Task<long> UpdateAsync(TModel entity);
+
+        /// <summary>
+        /// Drop collection
+        /// </summary>
+        /// <param name="nameTable"></param>
+        Task DropCollectionAsync(string nameTable);
+
     }
 }

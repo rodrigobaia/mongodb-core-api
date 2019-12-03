@@ -21,10 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Log4net.Core\Log4net.Core.csproj" />
-    <ProjectReference Include="..\Log4net.Infra.Repository.Interfaces\Log4net.Infra.Repository.Interfaces.csproj" />
-    <ProjectReference Include="..\Log4net.Infra.Repository\Log4net.Infra.Repository.csproj" />
-    <ProjectReference Include="..\Log4net.ValueObject\Log4net.ValueObject.csproj" />
+    <ProjectReference Include="..\Log4net.Business.Interfaces\Log4net.Business.Interfaces.csproj" />
+    <ProjectReference Include="..\Log4net.DTO\Log4net.DTO.csproj" />
+    <ProjectReference Include="..\Log4net.Infra.Crosscutting.IoC\Log4net.Infra.Crosscutting.IoC.csproj" />
+    <ProjectReference Include="..\Log4net.Infra.Crosscutting.Mappings\Log4net.Infra.Crosscutting.Mappings.csproj" />
+    <ProjectReference Include="..\Log4net.Infra.Crosscutting\Log4net.Infra.Crosscutting.csproj" />
   </ItemGroup>
 
 </Project>

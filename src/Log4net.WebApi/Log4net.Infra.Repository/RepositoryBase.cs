@@ -1,8 +1,9 @@
 ﻿using Log4net.Core;
+using Log4net.Infra.Crosscutting;
 using Log4net.Infra.Repository.Interfaces;
-using Log4net.ValueObject;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 namespace Log4net.Infra.Repository
 {
     /// <summary>
-    /// 
+    /// Repository base
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
     public class RepositoryBase<TModel> : IRepositoryBase<TModel> where TModel : EntityBase
@@ -23,12 +24,13 @@ namespace Log4net.Infra.Repository
         IMongoDatabase _db;
 
         /// <summary>
-        /// 
+        /// Construtor
         /// </summary>
         public RepositoryBase(IOptions<MongoSettings> mongoSettings)
         {
             var builder = new ConfigurationBuilder()
-                           .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+                           .SetBasePath(Directory.GetCurrentDirectory())
+                           .AddJsonFile("appsettings.json");
 
             Configuration = builder.Build();
 
@@ -56,13 +58,14 @@ namespace Log4net.Infra.Repository
         public virtual string DatabaseName { get; set; }
 
         /// <summary>
-        /// 
+        /// Count Fields
         /// </summary>
         /// <returns></returns>
-        public long CountFields()
+        protected long CountFields(FilterDefinition<TModel> filter = null)
         {
-            GetDatabase();
-            var results = _db.GetCollection<TModel>(typeof(TModel).Name).Count(new FilterDefinitionBuilder<TModel>().Empty); ;
+
+            var results = Collection()
+                            .CountDocuments(filter);
 
             return results;
         }
@@ -73,42 +76,55 @@ namespace Log4net.Infra.Repository
             _db = _client.GetDatabase(DatabaseName);
         }
 
+        /// <summary>
+        /// Collection
+        /// </summary>
+        /// <returns></returns>
         protected IMongoCollection<TModel> Collection()
         {
             GetDatabase();
 
-            NameTable = (string.IsNullOrEmpty(NameTable) ? string.Format("Log_{0:yyyyMMdd}", DateTime.Now) : NameTable);
+            NameTable = (string.IsNullOrEmpty(NameTable) ? string.Format("_Log_{0:yyyyMMdd}", DateTime.Now) : NameTable);
 
             var collection = _db.GetCollection<TModel>(NameTable);
+
+            //collection.CreateIndex(IndexKeysDefinition<TModel>.Ascending(_ => _.));
 
             return collection;
         }
 
-        public void Delete(Expression<Func<TModel, bool>> predicate)
+        /// <summary>
+        /// Delete
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public async Task<long> DeleteAsync(Expression<Func<TModel, bool>> predicate)
         {
-            var results = Collection().DeleteOneAsync<TModel>(predicate);
-            //results.Result.DeletedCount
+            var results = await Collection().DeleteOneAsync<TModel>(predicate);
+
+            return results.DeletedCount;
         }
 
-        public void Delete(string query)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<TModel> GetByAsync(ObjectId id)
         {
-            throw new NotImplementedException();
+            Expression<Func<TModel, bool>> filter = x => x.Id == id;
+            var results = await Collection().Find(filter).FirstAsync();
+
+            return results;
         }
 
-        public TModel GetBy(string query)
+        public async Task<IEnumerable<TModel>> GetFilterAsync(Expression<Func<TModel, bool>> predicate)
         {
-            throw new NotImplementedException();
-        }
+            //var findOptions = new FindOptions { }
+            var results = await Collection().Find(predicate).ToListAsync();
 
-        public async Task<IEnumerable<TModel>> GetFilterAsync(string query)
-        {
-            //var tags = query.ToUpper().Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries).ToList();
-            //var filter = Builders<TModel>.Filter.All(c => c.Tags, tags);
-            //var results = await _db.GetCollection<TModel>(typeof(TModel).Name).FindAsync(filter);
-
-            //return results.ToList();
-
-            return null;
+            return results;
         }
 
         public async Task<long> InsertAsync(TModel entity)
@@ -119,10 +135,24 @@ namespace Log4net.Infra.Repository
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <returns></returns>
         public async Task<long> UpdateAsync(TModel entity)
         {
-            //await Collection().UpdateOneAsync<TModel>(x=>x.)
-            throw new NotImplementedException();
+            //var result = await Collection().UpdateOneAsync(filter, update);
+
+            //return result.MatchedCount;
+
+            var filter = Builders<TModel>.Filter.Eq(c => c.Id == entity.Id, true);
+
+            var results = await Collection().UpdateOneAsync(filter, new ObjectUpdateDefinition<TModel>(entity));
+
+            return results.MatchedCount;
+
         }
 
         public async Task<long> InsertAsync(IEnumerable<TModel> entities)
@@ -131,6 +161,15 @@ namespace Log4net.Infra.Repository
             await Collection().InsertManyAsync(entities);
 
             return 1;
+        }
+
+        public async Task DropCollectionAsync(string nameTable)
+        {
+
+            GetDatabase();
+            await _db.DropCollectionAsync(nameTable);
+
+
         }
     }
 }

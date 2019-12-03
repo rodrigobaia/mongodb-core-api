@@ -15,8 +15,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Log4net.Core\Log4net.Core.csproj" />
+    <ProjectReference Include="..\Log4net.Infra.Crosscutting\Log4net.Infra.Crosscutting.csproj" />
     <ProjectReference Include="..\Log4net.Infra.Repository.Interfaces\Log4net.Infra.Repository.Interfaces.csproj" />
-    <ProjectReference Include="..\Log4net.ValueObject\Log4net.ValueObject.csproj" />
   </ItemGroup>
 
 </Project>

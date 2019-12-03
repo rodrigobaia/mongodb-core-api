@@ -18,7 +18,7 @@ namespace Log4net.Core
         /// <summary>
         /// Created In
         /// </summary>
-        [BsonElement("created")]
+        [BsonElement("CreatedIn")]
         [BsonRequired()]
         public DateTime CreatedIn { get; set; } = DateTime.Now;
     }

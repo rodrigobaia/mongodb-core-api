@@ -5,12 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Bson" Version="2.9.3" />
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Log4net.Business.Interfaces\Log4net.Business.Interfaces.csproj" />
     <ProjectReference Include="..\Log4net.Core\Log4net.Core.csproj" />
+    <ProjectReference Include="..\Log4net.DTO\Log4net.DTO.csproj" />
     <ProjectReference Include="..\Log4net.Infra.Crosscutting\Log4net.Infra.Crosscutting.csproj" />
+    <ProjectReference Include="..\Log4net.Infra.Repository.Interfaces\Log4net.Infra.Repository.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,6 @@ namespace Log4net.Infra.Repository.Interfaces
     public interface IAuditoriaRepository : IRepositoryBase<Auditoria>
     {
 
-        Auditoria Insert(Auditoria auditoria);
+
     }
 }

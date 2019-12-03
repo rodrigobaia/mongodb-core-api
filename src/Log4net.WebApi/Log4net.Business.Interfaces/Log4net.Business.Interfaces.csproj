@@ -1,10 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Log4net.DTO\Log4net.DTO.csproj" />
     <ProjectReference Include="..\Log4net.Infra.Crosscutting\Log4net.Infra.Crosscutting.csproj" />
   </ItemGroup>
 

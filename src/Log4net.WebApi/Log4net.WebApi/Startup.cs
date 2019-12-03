@@ -1,9 +1,7 @@
 using AutoMapper;
-using Log4net.Core;
-using Log4net.Infra.Repository;
-using Log4net.Infra.Repository.Interfaces;
-using Log4net.ValueObject;
-using Log4net.WebApi.Models;
+using Log4net.Infra.Crosscutting;
+using Log4net.Infra.Crosscutting.IoC;
+using Log4net.Infra.Crosscutting.Mappings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -66,15 +64,9 @@ namespace Log4net.WebApi
                 });
             });
 
+            Bootstrapper.RegisterServices(services);
 
-            services.AddScoped<IAuditoriaRepository, AuditoriaRepository>();
-
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<AuditoriaVM, Auditoria>();
-            });
-
-            IMapper mapper = config.CreateMapper();
+            IMapper mapper = AutoMappingConfig.RegisterMappings();
             services.AddSingleton(mapper);
 
             services.Configure<MongoSettings>(Configuration.GetSection("MongoDbSettings"));

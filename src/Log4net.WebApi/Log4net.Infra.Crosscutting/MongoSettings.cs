@@ -1,11 +1,7 @@
-﻿namespace Log4net.ValueObject
+﻿namespace Log4net.Infra.Crosscutting
 {
-    /// <summary>
-    /// Mongo Settings
-    /// </summary>
     public class MongoSettings
     {
-
         /// <summary>
         /// Server
         /// </summary>

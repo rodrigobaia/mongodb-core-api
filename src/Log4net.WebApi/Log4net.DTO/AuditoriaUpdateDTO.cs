@@ -1,18 +1,9 @@
 ﻿using System;
 
-namespace Log4net.WebApi.Models
+namespace Log4net.DTO
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class AuditoriaVM
+    public class AuditoriaUpdateDTO : EntityBaseDTO
     {
-
-        ///// <summary>
-        ///// Name Application
-        ///// </summary>
-        //public string NameApplication { get; set; }
-
         /// <summary>
         /// Exception
         /// </summary>
