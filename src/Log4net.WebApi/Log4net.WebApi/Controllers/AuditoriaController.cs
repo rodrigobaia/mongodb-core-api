@@ -36,8 +36,8 @@ namespace Log4net.WebApi.Controllers
         /// </summary>
         /// <param name="auditoriaRequestVM"></param>
         /// <returns></returns>
-        [HttpPost(Name = "Insert")]
-        //[Route("Insert")]
+        [HttpPost()]
+        [Route("Insert")]
         public async Task<IActionResult> InsertAsync(AuditoriaRequestVM auditoriaRequestVM)
         {
             try
@@ -69,8 +69,8 @@ namespace Log4net.WebApi.Controllers
         /// </summary>
         /// <param name="audtiyFIlterVM"></param>
         /// <returns></returns>
-        [HttpPut(Name = "Filter")]
-        //[Route("Filter")]
+        [HttpPut()]
+        [Route("Filter")]
         public async Task<IActionResult> FilterAsync(AudtiyFIlterVM audtiyFIlterVM)
         {
             try
