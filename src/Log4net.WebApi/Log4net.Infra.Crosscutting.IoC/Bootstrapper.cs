@@ -18,7 +18,7 @@ namespace Log4net.Infra.Crosscutting.IoC
         {
 
             services.AddScoped(typeof(IBusinessBase), typeof(BusinessBase));
-            services.AddScoped(typeof(IAuditoriaBusiness), typeof(AuditoriaBusiness));
+            services.AddScoped(typeof(IAuditBusiness), typeof(AuditBusiness));
 
         }
 
@@ -29,7 +29,7 @@ namespace Log4net.Infra.Crosscutting.IoC
             //Repositories
 
             services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
-            services.AddScoped(typeof(IAuditoriaRepository), typeof(AuditoriaRepository));
+            services.AddScoped(typeof(IAuditRepository), typeof(AuditRepository));
 
             //var repositoryTypes = services..GetTypesToRegister(typeof(IRepositoryBase<>), new[] { Assembly.GetAssembly(typeof(RepositoryBase<>)) });
 

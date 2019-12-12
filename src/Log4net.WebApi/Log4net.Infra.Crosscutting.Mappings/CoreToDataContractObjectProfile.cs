@@ -15,9 +15,9 @@ namespace Log4net.Infra.Crosscutting.Mappings
 
         private void AuditoriaCreateMap()
         {
-            CreateMap<Auditoria, AuditoriaInsertDTO>();
+            CreateMap<Audit, AuditInsertDTO>();
 
-            CreateMap<Auditoria, AuditoriaGetDTO>();
+            CreateMap<Audit, AuditGetDTO>();
 
 
         }

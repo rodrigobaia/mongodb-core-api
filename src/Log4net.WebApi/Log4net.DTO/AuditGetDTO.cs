@@ -1,0 +1,47 @@
+﻿using System;
+
+namespace Log4net.DTO
+{
+    public class AuditGetDTO : EntityBaseDTO
+    {
+        /// <summary>
+        /// Exception
+        /// </summary>
+        public string Exception { get; set; }
+
+        /// <summary>
+        /// Level
+        /// </summary>
+        public string Level { get; set; }
+
+        /// <summary>
+        /// Message
+        /// </summary>
+        public string Message { get; set; }
+
+        /// <summary>
+        /// Created
+        /// </summary>
+        public DateTime Created { get; set; }
+
+        /// <summary>
+        /// Therad
+        /// </summary>
+        public string Therad { get; set; }
+
+        /// <summary>
+        /// Method
+        /// </summary>
+        public string Method { get; set; }
+
+        /// <summary>
+        /// Version
+        /// </summary>
+        public string Version { get; set; }
+
+        /// <summary>
+        /// Org
+        /// </summary>
+        public string Org { get; set; }
+    }
+}

@@ -14,11 +14,11 @@ namespace Log4net.Infra.Crosscutting.Mappings
 
         private void AuditoriaCreateMap()
         {
-            CreateMap<AuditoriaInsertDTO, Auditoria>()
+            CreateMap<AuditInsertDTO, Audit>()
                 .ForMember(des => des.Id, opt => opt.Ignore());
 
 
-            CreateMap<AuditoriaUpdateDTO, Auditoria>()
+            CreateMap<AuditUpdateDTO, Audit>()
                 .ForMember(des => des.Id, opt => opt.Ignore());
 
         }
